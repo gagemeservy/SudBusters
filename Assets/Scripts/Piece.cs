@@ -145,18 +145,6 @@ public class Piece : MonoBehaviour
                         Move(Vector2Int.down);
                         timeElapsed = 0;
                     }
-                    else if (Input.GetKey(KeyCode.LeftArrow))
-                    {
-                        MoveWithTimer(Vector2Int.left);
-                    }
-                    else if (Input.GetKey(KeyCode.RightArrow))
-                    {
-                        MoveWithTimer(Vector2Int.right);
-                    }
-                    else if (Input.GetKey(KeyCode.DownArrow))
-                    {
-                        MoveWithTimer(Vector2Int.down);
-                    }
                     else if (Input.GetKeyDown(KeyCode.UpArrow))
                     {
                         SlamDrop();
@@ -169,6 +157,18 @@ public class Piece : MonoBehaviour
                     else if (Input.GetKeyDown(KeyCode.RightBracket))
                     {
                         Rotate(1);
+                    }
+                    else if (Input.GetKey(KeyCode.LeftArrow))
+                    {
+                        MoveWithTimer(Vector2Int.left);
+                    }
+                    else if (Input.GetKey(KeyCode.RightArrow))
+                    {
+                        MoveWithTimer(Vector2Int.right);
+                    }
+                    else if (Input.GetKey(KeyCode.DownArrow))
+                    {
+                        MoveWithTimer(Vector2Int.down);
                     }
 
                     if (Time.time >= this.stepTime)
@@ -195,18 +195,6 @@ public class Piece : MonoBehaviour
                         Move(Vector2Int.down);
                         timeElapsed = 0;
                     }
-                    else if (Input.GetKey(KeyCode.A))
-                    {
-                        MoveWithTimer(Vector2Int.left);
-                    }
-                    else if (Input.GetKey(KeyCode.D))
-                    {
-                        MoveWithTimer(Vector2Int.right);
-                    }
-                    else if (Input.GetKey(KeyCode.S))
-                    {
-                        MoveWithTimer(Vector2Int.down);
-                    }
                     else if (Input.GetKeyDown(KeyCode.W))
                     {
                         SlamDrop();
@@ -219,6 +207,18 @@ public class Piece : MonoBehaviour
                     else if (Input.GetKeyDown(KeyCode.E))
                     {
                         Rotate(1);
+                    }
+                    else if (Input.GetKey(KeyCode.A))
+                    {
+                        MoveWithTimer(Vector2Int.left);
+                    }
+                    else if (Input.GetKey(KeyCode.D))
+                    {
+                        MoveWithTimer(Vector2Int.right);
+                    }
+                    else if (Input.GetKey(KeyCode.S))
+                    {
+                        MoveWithTimer(Vector2Int.down);
                     }
 
                     if (Time.time >= this.stepTime)

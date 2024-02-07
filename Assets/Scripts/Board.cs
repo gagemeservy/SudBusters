@@ -65,6 +65,9 @@ public class Board : MonoBehaviour
         this.oldYSpawnPosition = this.spawnPosition.y;
         this.oldNextPieceSpawnPosition = this.nextPiece.position;
 
+        unPause(this, this.pauseScreen);
+        unPause(this, this.gameOverScreen);
+
         for (int i = 0; i < tetrominoes.Length; i++) {
             this.tetrominoes[i].Initialize();
         }
