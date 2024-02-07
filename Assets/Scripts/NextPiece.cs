@@ -12,7 +12,7 @@ public class NextPiece : MonoBehaviour
     public NextPiece nextPiece { get; private set; }
     public Tilemap tilemap { get; private set; }
     public Vector3Int[] cells { get; private set; }
-    public Vector3Int position { get; private set; }
+    public Vector3Int position { get; set; }
     public TetrominoData data { get; private set; }
 
     public void SpawnNextPiece(TetrominoData data)

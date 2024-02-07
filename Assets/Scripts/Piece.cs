@@ -68,55 +68,164 @@ public class Piece : MonoBehaviour
         {
             this.board.ClearPiece(this);
 
-            //this.lockTime += Time.deltaTime;
+            this.lockTime += Time.deltaTime;
 
-            //STRAIGHT MOVEMENTS
+            if (this.board.twoPlayerBoard == null)
+            {
+                //STRAIGHT MOVEMENTS
 
-            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                Move(Vector2Int.left);
-                timeElapsed = 0;
-                //in each key down reset the time elapsed because that means they stopped holding the key from before
-            }
-            else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                Move(Vector2Int.right);
-                timeElapsed = 0;
-            }
-            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                Move(Vector2Int.down);
-                timeElapsed = 0;
-            }
-            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            {
-                MoveWithTimer(Vector2Int.left);
-            }
-            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            {
-                MoveWithTimer(Vector2Int.right);
-            }
-            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            {
-                MoveWithTimer(Vector2Int.down);
-            }
-            else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                SlamDrop();
-                timeElapsed = 0;
-            }
-            else if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftBracket))
-            {
-                Rotate(-1);
-            }
-            else if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.RightBracket))
-            {
-                Rotate(1);
-            }
+                if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    Move(Vector2Int.left);
+                    timeElapsed = 0;
+                    //in each key down reset the time elapsed because that means they stopped holding the key from before
+                }
+                else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    Move(Vector2Int.right);
+                    timeElapsed = 0;
+                }
+                else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    Move(Vector2Int.down);
+                    timeElapsed = 0;
+                }
+                else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    SlamDrop();
+                    timeElapsed = 0;
+                }
+                else if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftBracket))
+                {
+                    Rotate(-1);
+                }
+                else if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.RightBracket))
+                {
+                    Rotate(1);
+                }
+                else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                {
+                    MoveWithTimer(Vector2Int.left);
+                }
+                else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                {
+                    MoveWithTimer(Vector2Int.right);
+                }
+                else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+                {
+                    MoveWithTimer(Vector2Int.down);
+                }
+                
 
-            if (Time.time >= this.stepTime)
+                if (Time.time >= this.stepTime)
+                {
+                    Step();
+                }
+            }
+            else
             {
-                Step();
+                //Split up 1 player and 2 player
+
+                //1 player
+                if(board.PlayerNumber == 1)
+                {
+                    if (Input.GetKeyDown(KeyCode.LeftArrow))
+                    {
+                        Move(Vector2Int.left);
+                        timeElapsed = 0;
+                        //in each key down reset the time elapsed because that means they stopped holding the key from before
+                    }
+                    else if (Input.GetKeyDown(KeyCode.RightArrow))
+                    {
+                        Move(Vector2Int.right);
+                        timeElapsed = 0;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.DownArrow))
+                    {
+                        Move(Vector2Int.down);
+                        timeElapsed = 0;
+                    }
+                    else if (Input.GetKey(KeyCode.LeftArrow))
+                    {
+                        MoveWithTimer(Vector2Int.left);
+                    }
+                    else if (Input.GetKey(KeyCode.RightArrow))
+                    {
+                        MoveWithTimer(Vector2Int.right);
+                    }
+                    else if (Input.GetKey(KeyCode.DownArrow))
+                    {
+                        MoveWithTimer(Vector2Int.down);
+                    }
+                    else if (Input.GetKeyDown(KeyCode.UpArrow))
+                    {
+                        SlamDrop();
+                        timeElapsed = 0;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.LeftBracket))
+                    {
+                        Rotate(-1);
+                    }
+                    else if (Input.GetKeyDown(KeyCode.RightBracket))
+                    {
+                        Rotate(1);
+                    }
+
+                    if (Time.time >= this.stepTime)
+                    {
+                        Step();
+                    }
+                }
+                //2 player
+                if (board.PlayerNumber == 2)
+                {
+                    if (Input.GetKeyDown(KeyCode.A))
+                    {
+                        Move(Vector2Int.left);
+                        timeElapsed = 0;
+                        //in each key down reset the time elapsed because that means they stopped holding the key from before
+                    }
+                    else if (Input.GetKeyDown(KeyCode.D))
+                    {
+                        Move(Vector2Int.right);
+                        timeElapsed = 0;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.S))
+                    {
+                        Move(Vector2Int.down);
+                        timeElapsed = 0;
+                    }
+                    else if (Input.GetKey(KeyCode.A))
+                    {
+                        MoveWithTimer(Vector2Int.left);
+                    }
+                    else if (Input.GetKey(KeyCode.D))
+                    {
+                        MoveWithTimer(Vector2Int.right);
+                    }
+                    else if (Input.GetKey(KeyCode.S))
+                    {
+                        MoveWithTimer(Vector2Int.down);
+                    }
+                    else if (Input.GetKeyDown(KeyCode.W))
+                    {
+                        SlamDrop();
+                        timeElapsed = 0;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Q))
+                    {
+                        Rotate(-1);
+                    }
+                    else if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        Rotate(1);
+                    }
+
+                    if (Time.time >= this.stepTime)
+                    {
+                        Step();
+                    }
+                }
             }
 
             this.board.SetPiece(this);

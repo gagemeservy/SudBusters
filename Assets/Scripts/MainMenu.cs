@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
 
     public void TwoPlayerLevel()
     {
-        Debug.Log("Haven't made a scene for 2 player yet");
+        StartCoroutine(LoadAsyncScene("TwoPlayer"));
     }
 
     public void Quit()

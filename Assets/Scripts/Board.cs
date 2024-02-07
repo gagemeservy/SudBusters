@@ -17,6 +17,8 @@ public class Board : MonoBehaviour
     public Piece activePiece { get; private set; }
     public NextPiece nextPiece { get; private set; }
     public Vector3Int spawnPosition;
+    public Board twoPlayerBoard;
+    public int finalScore = -1;
     /******************************
      * THIS MAY CAUSE PROBLEMS. INITIALLY THE HEIGHT IS 20, BUT I ADDED 2 BECAUSE SOME OF THE PIECES SPAWN DIRECTLY
      * ABOVE THE BOUNDS AND I DON'T WANT THEM TO GET KICKED OUT SO I ADDED 2. 
@@ -38,7 +40,11 @@ public class Board : MonoBehaviour
 
     public bool isPaused = false;
     public GameObject gameOverScreen;
+    public int PlayerNumber = 0;
+    public TMP_Text gameOverText;
     public GameObject pauseScreen;
+    private Vector3Int oldNextPieceSpawnPosition;
+    private int oldYSpawnPosition;
 
     public RectInt Bounds
     {
@@ -56,6 +62,8 @@ public class Board : MonoBehaviour
         this.tilemap = GetComponentInChildren<Tilemap>();
         this.activePiece = GetComponentInChildren<Piece>();
         this.nextPiece = GetComponentInChildren<NextPiece>();
+        this.oldYSpawnPosition = this.spawnPosition.y;
+        this.oldNextPieceSpawnPosition = this.nextPiece.position;
 
         for (int i = 0; i < tetrominoes.Length; i++) {
             this.tetrominoes[i].Initialize();
@@ -69,16 +77,28 @@ public class Board : MonoBehaviour
 
     private void Update()
     {
-        this.textLevel.SetText(difficultyLevel.ToString());
-
+        if (Input.GetKeyDown(KeyCode.Escape) && (this.PlayerNumber == 0 || this.PlayerNumber == 1))
+        {
+            if(!isPaused) 
+            {
+                Pause(this, this.pauseScreen);
+            }
+            else
+            {
+                unPause(this, this.pauseScreen);
+            }
+        }
     }
 
     public void AddScore(int numberToAdd) 
     {
-        this.score += numberToAdd;
+        if(finalScore == -1)
+        {
+            this.score += numberToAdd;
 
-        //update the UI
-        this.textScore.SetText(score.ToString());
+            //update the UI
+            this.textScore.SetText(score.ToString());
+        }
     }
 
     public void SpawnRandomPieces()
@@ -87,7 +107,7 @@ public class Board : MonoBehaviour
         TetrominoData data = this.tetrominoes[random];
         this.activePiece.Initialize(this, this.spawnPosition, data);
 
-        nextPieceNum = UnityEngine.Random.Range(0, this.tetrominoes.Length);
+        this.nextPieceNum = UnityEngine.Random.Range(0, this.tetrominoes.Length);
         data = this.tetrominoes[nextPieceNum];
         this.nextPiece.Initialize(this, this.nextPiece.nextPieceSpawnPosition, data, this.tilemap);
 
@@ -109,7 +129,7 @@ public class Board : MonoBehaviour
         this.activePiece.Initialize(this, this.spawnPosition, data);
 
         //Set next piece
-        nextPieceNum = UnityEngine.Random.Range(0, this.tetrominoes.Length);
+        this.nextPieceNum = UnityEngine.Random.Range(0, this.tetrominoes.Length);
         data = this.tetrominoes[nextPieceNum];
         this.nextPiece.SpawnNextPiece(data);
 
@@ -126,8 +146,37 @@ public class Board : MonoBehaviour
 
     private void GameOver()
     {
+        if (this.twoPlayerBoard == null)
+        {
+            Pause(this, this.gameOverScreen);
+        }
+        else
+        {
+            this.finalScore = score;
+            
+            this.spawnPosition.y = -1000;
+            this.nextPiece.position = new Vector3Int(-1000, -1000, 0);
 
-        Pause(this, this.gameOverScreen);
+            if ((this.twoPlayerBoard.finalScore > -1) && !this.isPaused && !this.twoPlayerBoard.isPaused)
+            {
+                int winningPlayerNumber = -1;
+                int winningScore = -1;
+
+                if (this.twoPlayerBoard.finalScore > this.finalScore)
+                {
+                    winningPlayerNumber = this.twoPlayerBoard.PlayerNumber;
+                    winningScore = this.twoPlayerBoard.finalScore;
+                }
+                else
+                {
+                    winningPlayerNumber = this.PlayerNumber;
+                    winningScore = this.finalScore;
+                }
+
+                this.gameOverText.SetText("Player " + winningPlayerNumber + " won with a score of " + winningScore + "!");
+                Pause(this, this.gameOverScreen);
+            }
+        }
     }
 
     public static void Pause(Board board, GameObject screenToShow)
@@ -144,22 +193,59 @@ public class Board : MonoBehaviour
         screenToHide.SetActive(false);
     }
 
+    public void Resume()
+    {
+        unPause(this, this.pauseScreen);
+    }
+
     public void Restart()
     {
         this.tilemap.ClearAllTiles();
 
+        //reset2playermodestuff
+        if (this.twoPlayerBoard != null)
+        {
+            this.gameOverText.SetText("GAME OVER");
+            this.finalScore = -1;
+            this.spawnPosition.y = oldYSpawnPosition;
+            this.nextPiece.position = oldNextPieceSpawnPosition;
+            this.twoPlayerBoard.Restart2Player();
+        }
+
         //Reset all starting values
-        difficultyLevel = 1;
-        score = 0;
-        comboCount = -1;
-        ongoingCombo = false;
-        stepReductionMultiplier = .05f;
-        tenLinesCleared = 0;
-        textLevel.SetText(1.ToString());
-        textScore.SetText(0.ToString());
+        this.difficultyLevel = 1;
+        this.score = 0;
+        this.comboCount = -1;
+        this.ongoingCombo = false;
+        this.stepReductionMultiplier = .05f;
+        this.tenLinesCleared = 0;
+        this.textLevel.SetText(1.ToString());
+        this.textScore.SetText(0.ToString());
         SpawnRandomPieces();
         unPause(this, this.gameOverScreen);
-}
+    }
+
+    public void Restart2Player()
+    {
+        this.tilemap.ClearAllTiles();
+
+        this.gameOverText.SetText("GAME OVER");
+        this.finalScore = -1;
+        this.spawnPosition.y = oldYSpawnPosition;
+        this.nextPiece.position = oldNextPieceSpawnPosition;
+
+        //Reset all starting values
+        this.difficultyLevel = 1;
+        this.score = 0;
+        this.comboCount = -1;
+        this.ongoingCombo = false;
+        this.stepReductionMultiplier = .05f;
+        this.tenLinesCleared = 0;
+        this.textLevel.SetText(1.ToString());
+        this.textScore.SetText(0.ToString());
+        SpawnRandomPieces();
+        //unPause(this, this.gameOverScreen);
+    }
 
     public void Quit()
     {
@@ -275,6 +361,8 @@ public class Board : MonoBehaviour
                 difficultyLevel++;
                 tenLinesCleared -= 10;
             }
+
+            this.textLevel.SetText(difficultyLevel.ToString());
         }
     }
 

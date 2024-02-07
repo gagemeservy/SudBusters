@@ -27,10 +27,14 @@ public class Ghost : MonoBehaviour
 
     private void LateUpdate()
     {
-        Clear();
-        Copy();
-        Drop();
-        SetPiece();
+        if(!(this.trackingPiece.position.y < -500))
+        {
+            Clear();
+            Copy();
+            Drop();
+            SetPiece();
+        }
+        
     }
 
     private void Clear()
