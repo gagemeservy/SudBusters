@@ -1,11 +1,6 @@
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 using TMPro;
-using Unity.Properties;
 using System;
 using UnityEngine.SceneManagement;
 using System.Collections;
@@ -250,6 +245,32 @@ public class Board : MonoBehaviour
         //unPause(this, this.gameOverScreen);
     }
 
+    public void RestartFromPauseMenu()
+    {
+        this.tilemap.ClearAllTiles();
+
+        //reset2playermodestuff
+        if (this.twoPlayerBoard != null)
+        {
+            this.gameOverText.SetText("GAME OVER");
+            this.finalScore = -1;
+            this.spawnPosition.y = oldYSpawnPosition;
+            this.nextPiece.position = oldNextPieceSpawnPosition;
+            this.twoPlayerBoard.Restart2Player();
+        }
+
+        //Reset all starting values
+        this.difficultyLevel = 1;
+        this.score = 0;
+        this.comboCount = -1;
+        this.ongoingCombo = false;
+        this.stepReductionMultiplier = .05f;
+        this.tenLinesCleared = 0;
+        this.textLevel.SetText(1.ToString());
+        this.textScore.SetText(0.ToString());
+        SpawnRandomPieces();
+        unPause(this, this.pauseScreen);
+    }
     public void Quit()
     {
         Application.Quit();
