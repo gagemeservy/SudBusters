@@ -223,21 +223,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 250978788012690247, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
-      propertyPath: m_enableVertexGradient
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2011291745534036286, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
-      propertyPath: m_Color.a
-      value: 0.5019608
-      objectReference: {fileID: 0}
     - target: {fileID: 7025600779019523400, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
       propertyPath: m_Name
       value: Board
-      objectReference: {fileID: 0}
-    - target: {fileID: 7544043306538873063, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8921404328864069906, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
       propertyPath: m_LocalPosition.x
@@ -371,6 +359,10 @@ PrefabInstance:
     - target: {fileID: 1932190761773330820, guid: c6bea8697213e3e42a667992534962f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337599153570721569, guid: c6bea8697213e3e42a667992534962f5, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5504316864498780944, guid: c6bea8697213e3e42a667992534962f5, type: 3}
       propertyPath: m_Name

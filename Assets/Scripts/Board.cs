@@ -199,6 +199,9 @@ public class Board : MonoBehaviour
     public void Restart()
     {
         this.tilemap.ClearAllTiles();
+        this.activePiece.currentSwipe = Vector2.zero;
+        this.activePiece.firstPressPos = Vector2.zero;
+        this.activePiece.secondPressPos = Vector2.zero;
 
         //reset2playermodestuff
         if (this.twoPlayerBoard != null)
@@ -226,6 +229,9 @@ public class Board : MonoBehaviour
     public void Restart2Player()
     {
         this.tilemap.ClearAllTiles();
+        this.activePiece.currentSwipe = Vector2.zero;
+        this.activePiece.firstPressPos = Vector2.zero;
+        this.activePiece.secondPressPos = Vector2.zero;
 
         this.gameOverText.SetText("GAME OVER");
         this.finalScore = -1;
@@ -248,6 +254,9 @@ public class Board : MonoBehaviour
     public void RestartFromPauseMenu()
     {
         this.tilemap.ClearAllTiles();
+        this.activePiece.currentSwipe = Vector2.zero;
+        this.activePiece.firstPressPos = Vector2.zero;
+        this.activePiece.secondPressPos = Vector2.zero;
 
         //reset2playermodestuff
         if (this.twoPlayerBoard != null)

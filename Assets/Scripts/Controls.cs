@@ -3,26 +3,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class Controls : MonoBehaviour
 {
-    public void OnePlayerLevel()
-    {
-        StartCoroutine(LoadAsyncScene("SinglePlayer"));
-    }
 
-    public void TwoPlayerLevel()
+    public void Back()
     {
-        StartCoroutine(LoadAsyncScene("TwoPlayer"));
-    }
-
-    public void ControlsPage()
-    {
-        StartCoroutine(LoadAsyncScene("Controls"));
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
+        StartCoroutine(LoadAsyncScene("MainMenu"));
     }
 
     IEnumerator LoadAsyncScene(String sceneToSwitchTo)
