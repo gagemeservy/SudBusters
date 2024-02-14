@@ -75,16 +75,22 @@ public class Board : MonoBehaviour
 
     private void Update()
     {
+        //player number check is to make sure that only player one presses it in either one or two player that way the menu doesn't trigger twice since there are two boards in two player
         if (Input.GetKeyDown(KeyCode.Escape) && (this.PlayerNumber == 0 || this.PlayerNumber == 1))
         {
-            if(!isPaused) 
-            {
-                Pause(this, this.pauseScreen);
-            }
-            else
-            {
-                unPause(this, this.pauseScreen);
-            }
+            PauseButton();
+        }
+    }
+
+    public void PauseButton()
+    {
+        if (!isPaused)
+        {
+            Pause(this, this.pauseScreen);
+        }
+        else
+        {
+            unPause(this, this.pauseScreen);
         }
     }
 

@@ -314,30 +314,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4602295186655966443, guid: c6bea8697213e3e42a667992534962f5, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5065360830515212196, guid: c6bea8697213e3e42a667992534962f5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 5504316864498780944, guid: c6bea8697213e3e42a667992534962f5, type: 3}
       propertyPath: m_Name
       value: CanvasBG
       objectReference: {fileID: 0}
-    - target: {fileID: 5504316864498780944, guid: c6bea8697213e3e42a667992534962f5, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
+    - target: {fileID: 7169077684024692896, guid: c6bea8697213e3e42a667992534962f5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 332984808}
     - target: {fileID: 8063535465826239727, guid: c6bea8697213e3e42a667992534962f5, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 8063535465826239727, guid: c6bea8697213e3e42a667992534962f5, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
