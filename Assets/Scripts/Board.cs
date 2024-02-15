@@ -130,6 +130,8 @@ public class Board : MonoBehaviour
     {
         //use next piece number to set active piece
         TetrominoData data = this.tetrominoes[nextPieceNum];
+        //This debug shows the name of the tile but it's not neccesary anymore
+        //Debug.Log(data.tetromino);
         this.activePiece.Initialize(this, this.spawnPosition, data);
 
         //Set next piece
@@ -352,10 +354,6 @@ public class Board : MonoBehaviour
                 return false;
             }
 
-            /*******************************************
-             * HERE WE WILL ALSO NEED TO CHECK IF THE CURRENT PIECE IS A STONE,
-             * THEN CHECK IF THE PIECE IN THE SPACE IS A BUBBLE BECAUSE IF SO THEN WE CAN OVER WRITE AND DELETE PART OF IT
-             * ******************************************/
             if (this.tilemap.HasTile(tilePosition))
             {
                 return false;
@@ -366,10 +364,64 @@ public class Board : MonoBehaviour
         return true;
     }
 
+    public bool IsValidToPop(Piece piece, Vector3Int position)
+    {
+        RectInt bounds = this.Bounds;
+        //need to remove piece so we don't accidentally think the space is taken, we'll put it back after
+        ClearPiece(piece);
+
+        for (int i = 0; i < piece.cells.Length; i++)
+        {
+            Vector3Int tilePosition = piece.cells[i] + position;
+
+            if (!bounds.Contains((Vector2Int)tilePosition))
+            {
+                SetPiece(piece);
+                return false;
+            }
+
+            /*******************************************
+             * HERE WE WILL ALSO NEED TO CHECK IF THE CURRENT PIECE IS A STONE,
+             * THEN CHECK IF THE PIECE IN THE SPACE IS A BUBBLE BECAUSE IF SO THEN WE CAN OVER WRITE AND DELETE PART OF IT
+             * ******************************************/
+
+            if (this.tilemap.HasTile(tilePosition))
+            {
+                //THIS CHECK IS DEPENDENT ON THE NAME OF THE SPRITE SO IF IT BREAKS IT'S BECAUSE THE NAME OF THE SPRITE DOESN'T CONTAIN THE WORD BUBBLE ANYMORE
+                //TileBase t = this.tilemap.GetTile(tilePosition);
+                //Debug.Log("Tile name is " + t.name);
+                //Debug.Log("Checking if the spot has a bubble, the name is " + this.tilemap.GetTile(tilePosition).name.ToLower());
+
+                if (this.tilemap.GetTile(tilePosition).name.ToLower().Contains("bubble"))
+                {
+                    //Debug.Log("There IS a bubble");
+                    //call function to pop bubble at this location
+                    PopABubble(tilePosition);
+                }
+                else
+                {
+
+                    SetPiece(piece);
+                    return false;
+                }
+            }
+
+        }
+
+        SetPiece(piece);
+        return true;
+    }
+
+    private void PopABubble(Vector3Int position)
+    {
+        //call some effects or something at this location
+        return;
+    }
+
     public void ClearLines()
     {
         //DIFFICULTY LEVEL IS KEPT TRACK OF IN THIS FUNCTION EVERY TIME A LEVEL IS CLEARED
-
+        //NEED TO CHECK IF A LINE IS MADE ONLY OF BUBBLE PIECES
         RectInt bounds = this.Bounds;
         int row = bounds.yMin;
         int newTenLinesCleared = tenLinesCleared;

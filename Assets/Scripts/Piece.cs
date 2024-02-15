@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
@@ -299,15 +300,8 @@ public class Piece : MonoBehaviour
                 return -1;
             }
         }
-        //else if(mouseLockTime > 0)
-        //{
-            //mouseLockTime -= Time.deltaTime;
-        //    mouseLockTime -= .1f;
-        //    return -1;
-        //}
         else
         {
-        //    mouseLockTime = 30f;
             return -1;
         }
     }
@@ -320,7 +314,7 @@ public class Piece : MonoBehaviour
 
         if(this.lockTime >= this.lockDelay)
         {
-            Lock () ;
+            Lock();
         }
     }
 
@@ -329,6 +323,33 @@ public class Piece : MonoBehaviour
         //add this score for any time a piece gets locked in place
         this.board.AddScore(1);
         this.board.SetPiece(this);
+        //Need to make stones fall through bubbles before clearing lines
+        //Need to check if current piece is a stone
+        //UnityEngine.Debug.Log("In lock at if statement for " + tetrominoName);
+        //StartCoroutine(CheckAndMoveThroughBubbles());
+        if (this.data.tetromino.ToString().ToLower().Contains("stone"))
+        {
+            while (MoveThroughBubbles())
+            {
+                continue;
+            }
+        }
+        this.board.ClearLines();
+        this.board.SpawnNextPieces();
+    }
+
+    private IEnumerator CheckAndMoveThroughBubbles()
+    {
+        if (this.data.tetromino.ToString().ToLower().Contains("stone"))
+        {
+            yield return new WaitForSeconds(2f);
+
+            while (MoveThroughBubbles())
+            {
+                yield return new WaitForSeconds(2f);
+                continue;
+            }
+        }
         this.board.ClearLines();
         this.board.SpawnNextPieces();
     }
@@ -362,6 +383,12 @@ public class Piece : MonoBehaviour
         //add one point for hard drop
         //and then in the board controller 1 point is always added when the piece is placed
         this.board.AddScore(1);
+        /**********************************************************************************
+         * IN THE LOCK FUNCTION WE NEED TO CHECK IF IT'S A SAND PIECE, IF SO, 
+         * MAKE ANOTHER MOVE FUNCTION THAT ONLY RETURNS A POSITION AS VALID IF IT'S ONLY OCCUPIED BY EMPTY SPACES OR BUBBLE PIECES,
+         * THEN MOVE THE PIECE AND CALL A FUNCTION FOR EACH BUBBLE POSITION ERASED (SO WE'LL HAVE TO KEEP TRACK OF EACH POSITION THAT HAS A BUBBLE)
+         * ALSO PROBABLY NEED A NEW ISVALIDPOSITION FUNCTION IN THE BOARD TO CHECK THIS CRAP
+         * *******************************************************************************/
         Lock();
     }
 
@@ -377,6 +404,26 @@ public class Piece : MonoBehaviour
         {
             this.position = newPosition;
             this.lockTime = 0;
+        }
+
+        return valid;
+    }
+
+    private bool MoveThroughBubbles()
+    {
+        Vector2Int translation = Vector2Int.down;
+        Vector3Int newPosition = this.position;
+        newPosition.x += translation.x;
+        newPosition.y += translation.y;
+
+        bool valid = this.board.IsValidToPop(this, newPosition);
+
+        if (valid)
+        {
+            this.board.ClearPiece(this);
+            this.position = newPosition;
+            this.lockTime = 0;
+            this.board.SetPiece(this);
         }
 
         return valid;
