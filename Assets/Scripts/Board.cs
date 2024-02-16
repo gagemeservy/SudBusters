@@ -31,6 +31,7 @@ public class Board : MonoBehaviour
     public int tenLinesCleared = 0;
     public TMP_Text textLevel;
     public TMP_Text textScore;
+    public TMP_Text textCombo;
     private int nextPieceNum;
 
     public bool isPaused = false;
@@ -229,6 +230,7 @@ public class Board : MonoBehaviour
         this.stepReductionMultiplier = .05f;
         this.tenLinesCleared = 0;
         this.textLevel.SetText(1.ToString());
+        this.textCombo.SetText(0.ToString());
         this.textScore.SetText(0.ToString());
         SpawnRandomPieces();
         unPause(this, this.gameOverScreen);
@@ -254,6 +256,7 @@ public class Board : MonoBehaviour
         this.stepReductionMultiplier = .05f;
         this.tenLinesCleared = 0;
         this.textLevel.SetText(1.ToString());
+        this.textCombo.SetText(0.ToString());
         this.textScore.SetText(0.ToString());
         SpawnRandomPieces();
         //unPause(this, this.gameOverScreen);
@@ -284,6 +287,7 @@ public class Board : MonoBehaviour
         this.stepReductionMultiplier = .05f;
         this.tenLinesCleared = 0;
         this.textLevel.SetText(1.ToString());
+        this.textCombo.SetText(0.ToString());
         this.textScore.SetText(0.ToString());
         SpawnRandomPieces();
         unPause(this, this.pauseScreen);
@@ -428,7 +432,20 @@ public class Board : MonoBehaviour
 
         while (row < bounds.yMax) 
         {
-            if (IsLineFull(row))
+            if(IsLineBubbles(row))
+            {
+                Debug.Log("Line is bubbles");
+                //do a while loop to start at this row and go to the bottom popping bubbles
+                this.tilemap.ClearAllTiles();
+                CalculateScore(20);
+                //combo count got raised here, but it will also be raised in the score calc right after this so check if it's -1 then if not decrement it
+                if(comboCount != -1)
+                {
+                    comboCount--;
+                }
+                newTenLinesCleared++;
+            }
+            else if (IsLineFull(row))
             {
                 LineClear(row);
                 newTenLinesCleared++;
@@ -455,6 +472,11 @@ public class Board : MonoBehaviour
 
             this.textLevel.SetText(difficultyLevel.ToString());
         }
+        else 
+        {
+            comboCount = -1;
+            this.textCombo.SetText(0.ToString());
+        }
     }
 
     private void CalculateScore(int linesCleared)
@@ -467,6 +489,16 @@ public class Board : MonoBehaviour
         {
             AddScore(50 * comboCount * difficultyLevel);
         }
+        
+        if(comboCount == -1)
+        {
+            this.textCombo.SetText(0.ToString());
+        }
+        else
+        {
+            this.textCombo.SetText(comboCount.ToString());
+        }
+        
     }
 
     private void LineScore(int linesCleared)
@@ -521,6 +553,27 @@ public class Board : MonoBehaviour
             Vector3Int position = new Vector3Int(col, row, 0);
 
             if (!this.tilemap.HasTile(position))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool IsLineBubbles(int row)
+    {
+        RectInt bounds = this.Bounds;
+
+        for (int col = bounds.xMin; col < bounds.xMax; col++)
+        {
+            Vector3Int position = new Vector3Int(col, row, 0);
+
+            if (!this.tilemap.HasTile(position))
+            {
+                return false;
+            } 
+            else if (!this.tilemap.GetTile(position).name.ToLower().Contains("bubble"))
             {
                 return false;
             }
