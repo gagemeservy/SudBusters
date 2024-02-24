@@ -5,10 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class Controls : MonoBehaviour
 {
+    private AudioManager audioPlayer;
 
+    private void Awake()
+    {
+        this.audioPlayer = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+    
     public void Back()
     {
+        ButtonPressSound();
         StartCoroutine(LoadAsyncScene("MainMenu"));
+    }
+
+    private void ButtonPressSound()
+    {
+        audioPlayer.PlaySFX(audioPlayer.ButtonClicked);
     }
 
     IEnumerator LoadAsyncScene(String sceneToSwitchTo)

@@ -24,9 +24,12 @@ public class Piece : MonoBehaviour
     public float mouseRoomForError = .5f;
     private float mouseLockTime = 0;
 
+    AudioManager audioPlayer;
+
 
     public void Initialize(Board board, Vector3Int position, TetrominoData data)
     {
+        this.audioPlayer = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         this.board = board;
         this.position = position;
         this.data = data;
@@ -308,6 +311,7 @@ public class Piece : MonoBehaviour
 
     private void Step()
     {
+        audioPlayer.PlaySFX(audioPlayer.MoveSound);
         this.stepTime = Time.time + this.stepDelay;
 
         Move(Vector2Int.down);
@@ -320,6 +324,7 @@ public class Piece : MonoBehaviour
 
     private void Lock()
     {
+        audioPlayer.PlaySFX(audioPlayer.BlockLock);
         //add this score for any time a piece gets locked in place
         this.board.AddScore(1);
         this.board.SetPiece(this);
@@ -329,6 +334,8 @@ public class Piece : MonoBehaviour
         //StartCoroutine(CheckAndMoveThroughBubbles());
         if (this.data.tetromino.ToString().ToLower().Contains("stone"))
         {
+            //reset bubble pop sound number
+            this.board.bubblePopNum = 0;
             while (MoveThroughBubbles())
             {
                 continue;
@@ -383,17 +390,13 @@ public class Piece : MonoBehaviour
         //add one point for hard drop
         //and then in the board controller 1 point is always added when the piece is placed
         this.board.AddScore(1);
-        /**********************************************************************************
-         * IN THE LOCK FUNCTION WE NEED TO CHECK IF IT'S A SAND PIECE, IF SO, 
-         * MAKE ANOTHER MOVE FUNCTION THAT ONLY RETURNS A POSITION AS VALID IF IT'S ONLY OCCUPIED BY EMPTY SPACES OR BUBBLE PIECES,
-         * THEN MOVE THE PIECE AND CALL A FUNCTION FOR EACH BUBBLE POSITION ERASED (SO WE'LL HAVE TO KEEP TRACK OF EACH POSITION THAT HAS A BUBBLE)
-         * ALSO PROBABLY NEED A NEW ISVALIDPOSITION FUNCTION IN THE BOARD TO CHECK THIS CRAP
-         * *******************************************************************************/
+
         Lock();
     }
 
     private bool Move(Vector2Int translation)
     {
+        audioPlayer.PlaySFX(audioPlayer.MoveSound);
         Vector3Int newPosition = this.position;
         newPosition.x += translation.x;
         newPosition.y += translation.y;
@@ -431,6 +434,7 @@ public class Piece : MonoBehaviour
 
     private void Rotate(int direction)
     {
+        audioPlayer.PlaySFX(audioPlayer.RotateSound);
         int originalRotation = this.rotationIndex;
         this.rotationIndex = Wrap(this.rotationIndex + direction, 0, 4);
 

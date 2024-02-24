@@ -223,10 +223,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: stepReductionMultiplier
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: tetrominoes.Array.data[0].tile
+      value: 
+      objectReference: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: tetrominoes.Array.data[1].tile
+      value: 
+      objectReference: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: tetrominoes.Array.data[2].tile
+      value: 
+      objectReference: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: tetrominoes.Array.data[3].tile
+      value: 
+      objectReference: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: tetrominoes.Array.data[4].tile
+      value: 
+      objectReference: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: tetrominoes.Array.data[5].tile
+      value: 
+      objectReference: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: tetrominoes.Array.data[6].tile
+      value: 
+      objectReference: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
     - target: {fileID: 7025600779019523400, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
       propertyPath: m_Name
       value: Board
       objectReference: {fileID: 0}
+    - target: {fileID: 7214123960706461836, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartFromPauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544043306538873063, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 8921404328864069906, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

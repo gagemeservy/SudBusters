@@ -42,6 +42,10 @@ public class Board : MonoBehaviour
     private Vector3Int oldNextPieceSpawnPosition;
     private int oldYSpawnPosition;
 
+    public int bubblePopNum = 0;
+
+    AudioManager audioPlayer;
+
     public RectInt Bounds
     {
         get
@@ -53,6 +57,7 @@ public class Board : MonoBehaviour
     }
     private void Awake()
     {
+        this.audioPlayer = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         this.gameOverScreen.SetActive(false);
         this.pauseScreen.SetActive(false);
         this.tilemap = GetComponentInChildren<Tilemap>();
@@ -82,9 +87,14 @@ public class Board : MonoBehaviour
             PauseButton();
         }
     }
-
+    private void ButtonPressSound()
+    {
+        audioPlayer.PlaySFX(audioPlayer.ButtonClicked);
+    }
+    
     public void PauseButton()
     {
+        ButtonPressSound();
         if (!isPaused)
         {
             Pause(this, this.pauseScreen);
@@ -202,11 +212,13 @@ public class Board : MonoBehaviour
 
     public void Resume()
     {
+        ButtonPressSound();
         unPause(this, this.pauseScreen);
     }
 
     public void Restart()
     {
+        ButtonPressSound();
         this.tilemap.ClearAllTiles();
         this.activePiece.currentSwipe = Vector2.zero;
         this.activePiece.firstPressPos = Vector2.zero;
@@ -264,6 +276,7 @@ public class Board : MonoBehaviour
 
     public void RestartFromPauseMenu()
     {
+        ButtonPressSound();
         this.tilemap.ClearAllTiles();
         this.activePiece.currentSwipe = Vector2.zero;
         this.activePiece.firstPressPos = Vector2.zero;
@@ -292,13 +305,16 @@ public class Board : MonoBehaviour
         SpawnRandomPieces();
         unPause(this, this.pauseScreen);
     }
+
     public void Quit()
     {
+        ButtonPressSound();
         Application.Quit();
     }
 
     public void MainMenu()
     {
+        ButtonPressSound();
         StartCoroutine(LoadAsyncScene("MainMenu"));
     }
 
@@ -419,6 +435,15 @@ public class Board : MonoBehaviour
     private void PopABubble(Vector3Int position)
     {
         //call some effects or something at this location
+
+
+        audioPlayer.PlaySFX(audioPlayer.BubblePops[bubblePopNum]);
+
+        if(bubblePopNum < (audioPlayer.BubblePops.Length - 1))
+        {
+            bubblePopNum++;
+        }
+
         return;
     }
 
