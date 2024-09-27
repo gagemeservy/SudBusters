@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
@@ -6,6 +7,8 @@ public class Piece : MonoBehaviour
     public Board board { get; private set; }
     public TetrominoData data { get; private set; }
     public Vector3Int[] cells { get; private set; }
+
+    public GameObject[] ThreeDBubbles { get; private set; }
     public Vector3Int position { get; private set; }
     private bool slowDownButtonPress = false;
     private float timeElapsed = 0;
@@ -36,6 +39,7 @@ public class Piece : MonoBehaviour
         this.rotationIndex = 0;
         this.stepTime = Time.time + this.stepDelay;
         this.lockTime = 0f;
+        this.ThreeDBubbles = new GameObject[data.cells.Length];
 
         if (this.cells == null)
         {
@@ -45,6 +49,9 @@ public class Piece : MonoBehaviour
         for (int i = 0; i < data.cells.Length; i++)
         {
             this.cells[i] = (Vector3Int)data.cells[i];
+            GameObject tempBubble = Instantiate(this.data.tileObject, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+            this.ThreeDBubbles[i] = tempBubble;
+            this.ThreeDBubbles[i].transform.position = (Vector3Int)data.cells[i];
         }
     }
 

@@ -50,6 +50,7 @@ public struct TetrominoData
 {
     public Tetromino tetromino;
     public Tile tile;
+    public GameObject tileObject;
     public Vector2Int[] cells { get; private set; }
     public Vector2Int[,] wallKicks { get; private set; }
 
