@@ -14,6 +14,7 @@ public class Board : MonoBehaviour
     public Vector3Int spawnPosition;
     public Board twoPlayerBoard;
     public int finalScore = -1;
+    private float ThreeDBubblePositionOffset = .5f;
     /******************************
      * THIS MAY CAUSE PROBLEMS. INITIALLY THE HEIGHT IS 20, BUT I ADDED 2 BECAUSE SOME OF THE PIECES SPAWN DIRECTLY
      * ABOVE THE BOUNDS AND I DON'T WANT THEM TO GET KICKED OUT SO I ADDED 2. 
@@ -342,7 +343,11 @@ public class Board : MonoBehaviour
             
             this.tilemap.SetTile(tilePosition, piece.data.tile);
             //newGameObject.transform.position = gridLayout.CellToWorld(gridCellInt);
-            piece.ThreeDBubbles[i].transform.position = tilePosition;
+            float newX = tilePosition.x + ThreeDBubblePositionOffset;
+            float newY = tilePosition.y + ThreeDBubblePositionOffset;
+            float newZ = tilePosition.z + ThreeDBubblePositionOffset;
+            Vector3 newPOS = new Vector3(newX, newY, newZ);
+            piece.ThreeDBubbles[i].transform.position = newPOS;
         }
     }
 
@@ -352,6 +357,7 @@ public class Board : MonoBehaviour
         {
             Vector3Int tilePosition = piece.cells[i] + piece.position;
             this.tilemap.SetTile(tilePosition, piece.data.tile);
+
         }
     }
 
@@ -361,6 +367,8 @@ public class Board : MonoBehaviour
         {
             Vector3Int tilePosition = piece.cells[i] + piece.position;
             this.tilemap.SetTile(tilePosition, null);
+            //Not sure why I can't just call Destroy() but this should work for now until I can fix it
+            piece.ThreeDBubbles[i].transform.position = new Vector3(100000, 100000, 100000);
         }
     }
 
