@@ -434,15 +434,17 @@ public class Board : MonoBehaviour
 
     private void PopABubble(Vector3Int position)
     {
-        //call some effects or something at this location
+        //call some effects ripples
+        //call pop animation maybe
 
 
-        audioPlayer.PlaySFX(audioPlayer.BubblePops[bubblePopNum]);
-
-        if(bubblePopNum < (audioPlayer.BubblePops.Length - 1))
+        //audioPlayer.PlaySFX(audioPlayer.BubblePops[bubblePopNum]);
+        //audioPlayer.PlayPopSound(); THIS IS THE OLD UPDATED ONE
+        audioPlayer.EnqueuePop();
+        /*if(bubblePopNum < (audioPlayer.BubblePops.Length - 1))
         {
             bubblePopNum++;
-        }
+        }*/
 
         return;
     }
