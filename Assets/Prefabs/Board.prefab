@@ -4095,19 +4095,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tetrominoes:
   - tetromino: 0
-    tile: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 1
-    tile: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 2
-    tile: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 3
-    tile: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 4
-    tile: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 5
-    tile: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 6
-    tile: {fileID: 11400000, guid: 75d034f09e4f3a945b83cdc6aa6548f2, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 7
     tile: {fileID: 11400000, guid: 304a061aaa4f2e149a7521be4a0cfb8a, type: 2}
   - tetromino: 8
@@ -4130,7 +4130,7 @@ MonoBehaviour:
   score: 0
   comboCount: -1
   ongoingCombo: 0
-  stepReductionMultiplier: 0.05
+  stepReductionMultiplier: 0.08
   tenLinesCleared: 0
   textLevel: {fileID: 6998793952816194375}
   textScore: {fileID: 3799877440436843448}
@@ -4140,6 +4140,7 @@ MonoBehaviour:
   PlayerNumber: 0
   gameOverText: {fileID: 4676278773814416899}
   pauseScreen: {fileID: 2781189372436965996}
+  bubblePopNum: 0
 --- !u!114 &3853303310047289477
 MonoBehaviour:
   m_ObjectHideFlags: 0
