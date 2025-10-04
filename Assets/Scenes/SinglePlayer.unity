@@ -335,6 +335,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: rippleTrigger
+      value: 
+      objectReference: {fileID: 1819144006}
+    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
       propertyPath: tetrominoes.Array.data[0].tile
       value: 
       objectReference: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
@@ -385,7 +389,7 @@ PrefabInstance:
     - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
       propertyPath: tetrominoes.Array.data[12].tile
       value: 
-      objectReference: {fileID: 11400000, guid: 3f824356c51cb8f40a9c7fcef79cab65, type: 2}
+      objectReference: {fileID: 11400000, guid: 59eb990e03bdc2049aa6d3b540f0ff40, type: 2}
     - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
       propertyPath: tetrominoes.Array.data[13].tile
       value: 
@@ -437,19 +441,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7025600779019523400, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1819144006}
   m_SourcePrefab: {fileID: 100100000, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+--- !u!1 &1629187588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7025600779019523400, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+  m_PrefabInstance: {fileID: 1629187587}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1819144005 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
   m_PrefabInstance: {fileID: 1629187587}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1629187588}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0235ef0285224a04c94616f0b7213a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1819144006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629187588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e981844b0207ce441b98465e8f6cc118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rippleMaterial: {fileID: 2100000, guid: e890ce5a58fa07b40be9c39718ac0cff, type: 2}
 --- !u!224 &1993627855 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 348506456126142610, guid: a6d2a194d9c7d3345a86db1a669a16a8, type: 3}
