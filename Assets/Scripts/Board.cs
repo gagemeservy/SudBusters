@@ -7,7 +7,7 @@ using System.Collections;
 
 public class Board : MonoBehaviour
 {
-    public RippleTrigger rippleTrigger;
+    public RippleEffect rippleTrigger;
     public Tilemap tilemap { get; private set;}
     public TetrominoData[] tetrominoes;
     public Piece activePiece { get; private set; }
@@ -44,6 +44,12 @@ public class Board : MonoBehaviour
     private int oldYSpawnPosition;
 
     public int bubblePopNum = 0;
+    public float lineClearRippleTimeLength = 2;
+    public float lineClearRippleDiameter = 2;
+    public float lineClearRippleSpeed = 2;
+    public float sudBustRippleTimeLength = 2;
+    public float sudBustRippleTimeDiameter = 2;
+    public float sudBustRippleTimeSpeed = 2;
 
     AudioManager audioPlayer;
 
@@ -436,18 +442,17 @@ public class Board : MonoBehaviour
     private void PopABubble(Vector3Int position)
     {
         //call some effects ripples
-        // 1. Convert grid position to world position
-        Vector3 worldPos = this.tilemap.CellToWorld(position);
+        // Calculate where the ripple should appear on screen
+        // Convert grid position to world space
+        Vector3 worldPos = tilemap.CellToWorld(position);
 
-        // 2. Convert world pos to screen space
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+        // Convert world position to viewport space (0–1)
+        Vector3 viewportPos = Camera.main.WorldToViewportPoint(worldPos);
 
-        // 3. Normalize screen position (0–1 across width/height)
-        Vector2 normalized = new Vector2(screenPos.x / Screen.width, screenPos.y / Screen.height);
+        // Use only the X and Y for ripple position
+        Vector2 ripplePos = new Vector2(viewportPos.x, viewportPos.y);
 
-        // 4. Trigger ripple at this location
-        if (rippleTrigger != null)
-            rippleTrigger.TriggerRipple(normalized);
+        rippleTrigger.TriggerRipple(ripplePos, lineClearRippleTimeLength, lineClearRippleDiameter, lineClearRippleSpeed);
         //call pop animation maybe
 
 
