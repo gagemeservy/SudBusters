@@ -218,6 +218,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 519420032}
     - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: lineClearRippleSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: lineClearRippleDiameter
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
       propertyPath: tetrominoes.Array.data[0].tile
       value: 
       objectReference: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
