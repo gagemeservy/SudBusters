@@ -1,4 +1,4 @@
-Shader "Hidden/RippleEffect"
+Shader "Custom/RippleEffect"
 {
     Properties
     {
@@ -22,6 +22,8 @@ Shader "Hidden/RippleEffect"
             float4 _MainTex_TexelSize;
             float2 _RippleOrigin;
             float _RippleStrength;
+            float _RippleDiameter;
+            float _RippleSpeed;
 
             struct appdata
             {
@@ -47,9 +49,14 @@ Shader "Hidden/RippleEffect"
             {
                 float2 dir = i.uv - _RippleOrigin;
                 float dist = length(dir);
-                float wave = sin(dist * 60.0 - _Time.y * 10.0) * 0.03;
+
+                // Use the diameter to control wave frequency,
+                // and the speed to control time progression
+                float wave = sin(dist * 60.0 * _RippleDiameter - _Time.y * _RippleSpeed) * 0.03;
+
                 float ripple = dist + wave * _RippleStrength;
                 float2 uv = _RippleOrigin + normalize(dir) * ripple;
+
                 fixed4 col = tex2D(_MainTex, uv);
                 return col;
             }
