@@ -213,37 +213,13 @@ PrefabInstance:
       propertyPath: rippleTrigger
       value: 
       objectReference: {fileID: 519420032}
-    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
-      propertyPath: lineClearRippleSpeed
-      value: 90
+    - target: {fileID: 4128629326637198670, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: m_Sprite
+      value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
-      propertyPath: regularPopRippleSpeed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
-      propertyPath: sudBustRippleTimeSpeed
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
-      propertyPath: lineClearRippleDiameter
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
-      propertyPath: sudBustRippleTimeLength
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
-      propertyPath: regularPopRippleDiameter
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
-      propertyPath: lineClearRippleTimeLength
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 585115172590541982, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
-      propertyPath: regularPopRippleTimeLength
-      value: 1
+    - target: {fileID: 4128629326637198670, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7025600779019523400, guid: 8e703fd8318ada94e8f73b65feb3b664, type: 3}
       propertyPath: m_Name

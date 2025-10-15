@@ -647,7 +647,7 @@ public class Board : MonoBehaviour
         RectInt bounds = this.Bounds;
 
         Vector3Int popPosition = new Vector3Int(bounds.xMax/2-1, row, 0);
-        Ripple(popPosition, lineClearRippleTimeLength, lineClearRippleDiameter, lineClearRippleSpeed);
+        //Ripple(popPosition, lineClearRippleTimeLength, lineClearRippleDiameter, lineClearRippleSpeed);
         for (int col = bounds.xMin; col < bounds.xMax; col++)
         {
             Vector3Int position = new Vector3Int(col, row, 0);
