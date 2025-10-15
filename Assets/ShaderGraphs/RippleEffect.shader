@@ -46,25 +46,31 @@ Shader "Custom/RippleEffect"
             }
 
             fixed4 frag (v2f i) : SV_Target
-{
-    float2 dir = i.uv - _RippleOrigin;
-    float dist = length(dir);
+            {
+                float2 dir = i.uv - _RippleOrigin;
+                float dist = length(dir);
 
-    // Radius controls how large the ripple area is
-    float radius = _RippleDiameter * 0.5;
+                if (dist < 1e-4) return tex2D(_MainTex, i.uv);
 
-    // Fade is now a soft gradient that falls off naturally
-    float fade = exp(-pow(dist / radius, 2.5)); // smooth Gaussian-like falloff
+                float2 n = dir / dist;
 
-    // Sinusoidal wave motion with fade-out toward edges
-    float wave = sin(dist * 60.0 - _Time.y * _RippleSpeed) * 0.03 * _RippleStrength * fade;
+                // Adjust wave frequency and spread using diameter and speed
+                float waveFrequency = lerp(60.0, 20.0, saturate(_RippleDiameter)); // bigger diameter = slower waves
+                float waveSpeed = _RippleSpeed * 0.5; // controls outward motion
 
-    float ripple = dist + wave;
-    float2 uv = _RippleOrigin + normalize(dir) * ripple;
+                // The wave moves outward with time
+                float wave = sin(dist * waveFrequency - _Time.y * waveSpeed) * 0.03;
 
-    fixed4 col = tex2D(_MainTex, uv);
-    return col;
-}
+                // Limit how far ripples can affect (diameter as cutoff)
+                float fade = smoothstep(_RippleDiameter * 0.5, 0.0, dist);
+
+                // Apply the ripple
+                float ripple = dist + wave * _RippleStrength * fade;
+
+                float2 uv = _RippleOrigin + n * ripple;
+                fixed4 col = tex2D(_MainTex, uv);
+                return col;
+            }
             ENDCG
         }
     }

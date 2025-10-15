@@ -1,9 +1,10 @@
-using UnityEngine;
-using UnityEngine.Tilemaps;
-using TMPro;
 using System;
-using UnityEngine.SceneManagement;
 using System.Collections;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class Board : MonoBehaviour
 {
@@ -47,6 +48,9 @@ public class Board : MonoBehaviour
     public float lineClearRippleTimeLength = 2;
     public float lineClearRippleDiameter = 2;
     public float lineClearRippleSpeed = 2;
+    public float regularPopRippleTimeLength = 2;
+    public float regularPopRippleDiameter = 2;
+    public float regularPopRippleSpeed = 2;
     public float sudBustRippleTimeLength = 2;
     public float sudBustRippleTimeDiameter = 2;
     public float sudBustRippleTimeSpeed = 2;
@@ -441,18 +445,10 @@ public class Board : MonoBehaviour
 
     private void PopABubble(Vector3Int position)
     {
-        //call some effects ripples
-        // Calculate where the ripple should appear on screen
-        // Convert grid position to world space
-        Vector3 worldPos = tilemap.CellToWorld(position);
+        
 
-        // Convert world position to viewport space (0–1)
-        Vector3 viewportPos = Camera.main.WorldToViewportPoint(worldPos);
+        Ripple(position, regularPopRippleTimeLength, regularPopRippleDiameter, regularPopRippleSpeed);
 
-        // Use only the X and Y for ripple position
-        Vector2 ripplePos = new Vector2(viewportPos.x, viewportPos.y);
-
-        rippleTrigger.TriggerRipple(ripplePos, lineClearRippleTimeLength, lineClearRippleDiameter, lineClearRippleSpeed);
         //call pop animation maybe
 
 
@@ -481,6 +477,8 @@ public class Board : MonoBehaviour
             {
                 Debug.Log("Line is bubbles");
                 //do a while loop to start at this row and go to the bottom popping bubbles
+                Vector3Int position = new Vector3Int(bounds.xMax/2-1, row, 0);
+                Ripple(position, sudBustRippleTimeLength, sudBustRippleTimeDiameter, sudBustRippleTimeSpeed);
                 this.tilemap.ClearAllTiles();
                 CalculateScore(20);
                 //combo count got raised here, but it will also be raised in the score calc right after this so check if it's -1 then if not decrement it
@@ -493,6 +491,7 @@ public class Board : MonoBehaviour
             else if (IsLineFull(row))
             {
                 LineClear(row);
+                
                 newTenLinesCleared++;
             }
             else
@@ -627,10 +626,28 @@ public class Board : MonoBehaviour
         return true;
     }
 
+    public void Ripple(Vector3Int position, float TimeLength, float RippleDiameter, float RippleSpeed)
+    {
+        //call some effects ripples
+        // Calculate where the ripple should appear on screen
+        // Convert grid position to world space
+        Vector3 worldPos = tilemap.CellToWorld(position);
+
+        // Convert world position to viewport space (0–1)
+        Vector3 viewportPos = Camera.main.WorldToViewportPoint(worldPos);
+
+        // Use only the X and Y for ripple position
+        Vector2 ripplePos = new Vector2(viewportPos.x, viewportPos.y);
+
+        rippleTrigger.TriggerRipple(ripplePos, TimeLength, RippleDiameter, RippleSpeed);
+    }
+
     private void LineClear(int row)
     {
         RectInt bounds = this.Bounds;
-        
+
+        Vector3Int popPosition = new Vector3Int(bounds.xMax/2-1, row, 0);
+        Ripple(popPosition, lineClearRippleTimeLength, lineClearRippleDiameter, lineClearRippleSpeed);
         for (int col = bounds.xMin; col < bounds.xMax; col++)
         {
             Vector3Int position = new Vector3Int(col, row, 0);

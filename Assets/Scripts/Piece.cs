@@ -22,7 +22,7 @@ public class Piece : MonoBehaviour
     public Vector2 secondPressPos;
     public Vector2 currentSwipe;
     public float mouseRoomForError = .5f;
-    private float mouseLockTime = 0;
+    //private float mouseLockTime = 0;
 
     AudioManager audioPlayer;
 

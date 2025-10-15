@@ -1,6 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
+
+[System.Serializable]
+public struct Ripple
+{
+    public Vector2 origin;
+    public float strength;
+    public float diameter;
+    public float speed;
+    public float time;
+}
 
 public class RippleEffect : MonoBehaviour
 {
@@ -9,10 +20,13 @@ public class RippleEffect : MonoBehaviour
 
     [Header("Ripple Settings")]
     public Vector2 rippleOrigin = new Vector2(0.5f, 0.5f);
+    public VideoPlayer backgroundVideo; // assign in Inspector
     public float rippleStrength = 0f;
     public float rippleDiameter = 1f;
     public float rippleSpeed = 10f;
     public float fadeSpeed = 2f;
+
+    private bool isFadingOut = false;
 
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
@@ -22,6 +36,43 @@ public class RippleEffect : MonoBehaviour
         rippleMaterial.SetFloat("_RippleSpeed", rippleSpeed);
 
         Graphics.Blit(src, dest, rippleMaterial);
+
+        if (backgroundVideo != null)
+        {
+            // When the video finishes preparing (ready to display)
+            backgroundVideo.prepareCompleted += OnVideoReady;
+        }
+        else
+        {
+            Debug.LogWarning("No VideoPlayer assigned to RippleEffect.");
+        }
+    }
+
+    private void OnVideoReady(VideoPlayer source)
+    {
+        // Fade out ripple once video is ready to play
+        StartCoroutine(FadeOutRipple());
+    }
+
+    private IEnumerator FadeOutRipple()
+    {
+        if (isFadingOut) yield break;
+        isFadingOut = true;
+
+        float duration = 1.5f;
+        float startStrength = rippleStrength;
+        float t = 0f;
+
+        while (t < duration)
+        {
+            rippleStrength = Mathf.Lerp(startStrength, 0f, t / duration);
+            rippleMaterial.SetFloat("_RippleStrength", rippleStrength);
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        rippleStrength = 0f;
+        rippleMaterial.SetFloat("_RippleStrength", 0f);
     }
 
     // --- Trigger the ripple effect ---

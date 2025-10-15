@@ -4093,56 +4093,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0235ef0285224a04c94616f0b7213a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rippleTrigger: {fileID: 0}
   tetrominoes:
   - tetromino: 0
-    tile:
-    - {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 1
-    tile:
-    - {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 2
-    tile:
-    - {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 3
-    tile:
-    - {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 4
-    tile:
-    - {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 5
-    tile:
-    - {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 6
-    tile:
-    - {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
+    tile: {fileID: 11400000, guid: c8d9a6c7b86c88f4c8c4ebc588682f14, type: 2}
   - tetromino: 7
-    tile:
-    - {fileID: 11400000, guid: 304a061aaa4f2e149a7521be4a0cfb8a, type: 2}
-    - {fileID: 11400000, guid: 2e5b3a5a22bd0b74a82815f573e7a462, type: 2}
+    tile: {fileID: 11400000, guid: 304a061aaa4f2e149a7521be4a0cfb8a, type: 2}
   - tetromino: 8
-    tile:
-    - {fileID: 11400000, guid: 304a061aaa4f2e149a7521be4a0cfb8a, type: 2}
-    - {fileID: 11400000, guid: 2e5b3a5a22bd0b74a82815f573e7a462, type: 2}
+    tile: {fileID: 11400000, guid: 514739fa82fd1ac4a92bc7f269d56499, type: 2}
   - tetromino: 9
-    tile:
-    - {fileID: 11400000, guid: 304a061aaa4f2e149a7521be4a0cfb8a, type: 2}
-    - {fileID: 11400000, guid: 2e5b3a5a22bd0b74a82815f573e7a462, type: 2}
+    tile: {fileID: 11400000, guid: db62035d6679c3d43b0d2276c961fd4f, type: 2}
   - tetromino: 10
-    tile:
-    - {fileID: 11400000, guid: 304a061aaa4f2e149a7521be4a0cfb8a, type: 2}
-    - {fileID: 11400000, guid: 2e5b3a5a22bd0b74a82815f573e7a462, type: 2}
+    tile: {fileID: 11400000, guid: d68cb3f5920406e4babc4468f4486e40, type: 2}
   - tetromino: 11
-    tile:
-    - {fileID: 11400000, guid: 304a061aaa4f2e149a7521be4a0cfb8a, type: 2}
-    - {fileID: 11400000, guid: 2e5b3a5a22bd0b74a82815f573e7a462, type: 2}
+    tile: {fileID: 11400000, guid: 8d8e4ac22b675a24a8b6e3515520a17f, type: 2}
   - tetromino: 12
-    tile:
-    - {fileID: 11400000, guid: 304a061aaa4f2e149a7521be4a0cfb8a, type: 2}
-    - {fileID: 11400000, guid: 2e5b3a5a22bd0b74a82815f573e7a462, type: 2}
+    tile: {fileID: 11400000, guid: 59eb990e03bdc2049aa6d3b540f0ff40, type: 2}
   - tetromino: 13
-    tile:
-    - {fileID: 11400000, guid: 304a061aaa4f2e149a7521be4a0cfb8a, type: 2}
-    - {fileID: 11400000, guid: 2e5b3a5a22bd0b74a82815f573e7a462, type: 2}
+    tile: {fileID: 11400000, guid: 6986d3fdf9b738c4da060e0d9c4ff6a9, type: 2}
   spawnPosition: {x: -1, y: 8, z: 0}
   twoPlayerBoard: {fileID: 0}
   finalScore: -1
@@ -4162,6 +4142,12 @@ MonoBehaviour:
   gameOverText: {fileID: 4676278773814416899}
   pauseScreen: {fileID: 2781189372436965996}
   bubblePopNum: 0
+  lineClearRippleTimeLength: 1.5
+  lineClearRippleDiameter: 0.5
+  lineClearRippleSpeed: 45
+  sudBustRippleTimeLength: 3
+  sudBustRippleTimeDiameter: 20
+  sudBustRippleTimeSpeed: 45
 --- !u!114 &3853303310047289477
 MonoBehaviour:
   m_ObjectHideFlags: 0
