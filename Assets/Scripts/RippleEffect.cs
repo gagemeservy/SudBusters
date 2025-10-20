@@ -27,6 +27,41 @@ public class RippleEffect : MonoBehaviour
     public float fadeSpeed = 2f;
 
     private bool isFadingOut = false;
+    private static bool hasPlayedOnce = false;
+    public bool isMainMenu = false;
+
+    private void Start()
+    {   //this makes sure the main menu ripple doesn't happen twice and screw up everything
+        if (isMainMenu)
+        {
+            // Only run ripple logic the first time
+            if (hasPlayedOnce)
+        {
+            rippleStrength = 0f;
+            rippleMaterial.SetFloat("_RippleStrength", 0f);
+            return;
+        }
+
+        hasPlayedOnce = true;
+
+        if (backgroundVideo != null)
+        {
+            backgroundVideo.prepareCompleted += OnVideoReady;
+        }
+        else
+        {
+            Debug.LogWarning("No VideoPlayer assigned to RippleEffect.");
+        }
+        }
+        else
+        {
+            // For non-main-menu scenes, don’t affect hasPlayedOnce
+            if (backgroundVideo != null)
+            {
+                backgroundVideo.prepareCompleted += OnVideoReady;
+            }
+        }
+    }
 
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
@@ -36,16 +71,6 @@ public class RippleEffect : MonoBehaviour
         rippleMaterial.SetFloat("_RippleSpeed", rippleSpeed);
 
         Graphics.Blit(src, dest, rippleMaterial);
-
-        if (backgroundVideo != null)
-        {
-            // When the video finishes preparing (ready to display)
-            backgroundVideo.prepareCompleted += OnVideoReady;
-        }
-        else
-        {
-            Debug.LogWarning("No VideoPlayer assigned to RippleEffect.");
-        }
     }
 
     private void OnVideoReady(VideoPlayer source)
@@ -89,6 +114,8 @@ public class RippleEffect : MonoBehaviour
     private void Update()
     {
         if (rippleStrength > 0)
+        {
             rippleStrength = Mathf.MoveTowards(rippleStrength, 0, Time.deltaTime * fadeSpeed);
+        }
     }
 }

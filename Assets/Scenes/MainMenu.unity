@@ -1268,6 +1268,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1997071847298619212, guid: fe3578e9173e41c4f9e73eecf7c31d5c, type: 3}
+      propertyPath: isMainMenu
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997071847298619212, guid: fe3578e9173e41c4f9e73eecf7c31d5c, type: 3}
       propertyPath: rippleSpeed
       value: 40
       objectReference: {fileID: 0}
@@ -1282,7 +1286,7 @@ PrefabInstance:
     - target: {fileID: 1997071847298619212, guid: fe3578e9173e41c4f9e73eecf7c31d5c, type: 3}
       propertyPath: backgroundVideo
       value: 
-      objectReference: {fileID: 129690254}
+      objectReference: {fileID: 0}
     - target: {fileID: 7413795876718769125, guid: fe3578e9173e41c4f9e73eecf7c31d5c, type: 3}
       propertyPath: m_Name
       value: Main Camera
